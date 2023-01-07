@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class EmployeeValidationHandler extends ResponseEntityExceptionHandler {
+public class ValidationHandler extends ResponseEntityExceptionHandler {
 
         @Override
         protected ResponseEntity<Object> handleMethodArgumentNotValid(

@@ -16,4 +16,8 @@ public class DepartmentService {
                 .findById(id)
                 .orElseThrow(DepartmentNotFoundException::new);
     }
+
+    public Department saveDepartment(Department department) {
+        return departmentRepository.save(department);
+    }
 }
