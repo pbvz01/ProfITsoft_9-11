@@ -11,6 +11,10 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    public Iterable<Department> findAllDepartments() {
+        return departmentRepository.findAll();
+    }
+
     public Department findDepartmentById(Long id) {
         return departmentRepository
                 .findById(id)

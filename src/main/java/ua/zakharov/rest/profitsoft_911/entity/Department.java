@@ -1,14 +1,22 @@
 package ua.zakharov.rest.profitsoft_911.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
+import lombok.*;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name= "departments")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +29,29 @@ public class Department {
     @Column(name = "location")
     @NotEmpty(message = "The location field must not be empty")
     private String location;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Set<Employee> employees;
+
+    @Column(name = "city")
+    @NotEmpty(message = "The city field must not be empty")
+    private String city;
+
+    @Column(name = "country")
+    @NotEmpty(message = "The country field must not be empty")
+    private String country;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "department",
+            fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Employee> employees;
+
+    @Override
+    public String toString() {
+        return "Department {" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

@@ -27,6 +27,7 @@ public class EmployeeService {
                 .findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
     }
+
     public Map<String, Object> findEmployeeByNameAndLastnameWithPagination(
             String name, String lastname, Pageable pageable) {
         Page<Employee> employeePage = employeeRepository
@@ -42,19 +43,17 @@ public class EmployeeService {
 
     }
 
-
     public Employee saveEmployee(Employee employee, Long department_id) {
         Department department = departmentService.findDepartmentById(department_id);
         employee.setDepartment(department);
         return employeeRepository.save(employee);
     }
 
-//    //Put
-//    public Employee updateEmployee(Employee employee, Long department_id) {
-//        Department department = departmentService.findDepartmentById(department_id);
-//        Employee emp = employeeRepository.findById(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
-//        return employeeRepository.save(employee);
-//    }
+    public Employee updateEmployee(Employee employee, Long department_id) {
+        Department department = departmentService.findDepartmentById(department_id);
+        Employee emp = employeeRepository.findById(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
+        return employeeRepository.save(employee);
+    }
 
     public void deleteEmployeeById(Long id) {
         Employee employee = findEmployeeById(id);

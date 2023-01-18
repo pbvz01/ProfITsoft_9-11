@@ -49,11 +49,11 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.saveEmployee(employee, id), HttpStatus.CREATED);
     }
 
-    //вававав
-//    @PutMapping
-//    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee) {
-//        return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee,
+                                                   @PathVariable("id") Long depID) {
+        return new ResponseEntity<>(employeeService.updateEmployee(employee,depID), HttpStatus.CREATED);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable("id") Long id) {
